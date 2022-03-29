@@ -1,4 +1,6 @@
 import product from "../models/product.js"
+import cloudinary from "../utils/cloudinary.js"
+import upload from "../utils/multer.js"
 
 class productcontroller{
 
@@ -15,8 +17,9 @@ class productcontroller{
         data: products
        })
     }
-    static async deleteproduct(res,req){
-       const aproduct = await product.findByIdAndDelete(req.params.id)  
+    static async deleteproduct (req,res){
+       const aproduct = await product.findByIdAndDelete({_id:req.params.id}) 
+            console.log(aproduct)
         const productId = aproduct.cloudinary_id
         cloudinary.uploader.destroy(productId);
         if(!aproduct){

@@ -1,4 +1,4 @@
-import user from "../models/user"
+import user from "../models/user.js"
 
 class usercontroller{
 
@@ -31,6 +31,31 @@ static async getAll(req,res){
         data: Auser
     });
 }
+static async login(req,res){
+       const auser = await user.findOne({
+      email: req.body.email,
+    });
+
+    if (!auser) {
+      return res.status(404).json({
+        error: "user not found! kindly register first",
+      });
+    }
+    if (bcrypt.compare(req.body.password, auser.password)) {
+      auser.password = null;
+      const token = TokenAuth.TokenGenerator({ user: auser });
+      return res.status(200).json({
+        message: "successfully logged in",
+        token: token,
+        user: auser,
+      });
+    }
+    return res.status(404).json({
+      error: "Password incorrect!",
+    });
+}
 
 
 }
+
+export default usercontroller

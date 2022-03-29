@@ -3,6 +3,7 @@ import bodyParser from "body-parser"
 import mongoose from  "mongoose"
 import dotenv from "dotenv"
 import products from "./src/routes/productRoutes.js"
+import user from "./src/routes/userRoutes.js"
 
 dotenv.config("./.env")
 let app = express()
@@ -17,6 +18,7 @@ app.use(bodyParser.json())
 //     res.send("home page")
 // })
 app.use('/products', products)
+app.use('/user', user)
 let port = process.env.PORT
 
 app.listen(port,()=>{

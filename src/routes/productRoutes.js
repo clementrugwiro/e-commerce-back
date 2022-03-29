@@ -28,7 +28,7 @@ let productroute = express()
 
 })
 
-productroute.delete('/delete', productcontroller.deleteproduct)
+productroute.delete('/delete/:id', productcontroller.deleteproduct)
 
 productroute.get('/getall', productcontroller.getallproducts)
 
