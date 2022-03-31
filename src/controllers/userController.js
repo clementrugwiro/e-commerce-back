@@ -1,9 +1,23 @@
 import user from "../models/user.js"
+import bcrypt from "bcryptjs"
 
 class usercontroller{
 
 static async userCreate(req,res){
-    const auser = await user.create(req.body)
+    const auser = new user({
+        name: req.body.name,
+        email: req.body.email,
+        idNumber: req.body.idNumber,
+        phoneNumber: req.body.phoneNumber,
+        password: req.body.password
+        
+    })
+    const salt = await bcrypt.genSalt(8);
+    const hashpassword = await bcrypt.hash(auser.password, salt);
+
+    auser.password = hashpassword;
+    await auser.save();
+
     if(!auser){
         return res.status(404).json({
             error:"User not registered"
