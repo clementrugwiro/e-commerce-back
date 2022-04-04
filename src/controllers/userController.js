@@ -1,6 +1,6 @@
 import user from "../models/user.js"
 import bcrypt from "bcryptjs"
-
+import TokenAuth from "../middleware/auth.js";
 class usercontroller{
 
 static async userCreate(req,res){
@@ -9,6 +9,7 @@ static async userCreate(req,res){
         email: req.body.email,
         idNumber: req.body.idNumber,
         phoneNumber: req.body.phoneNumber,
+        role: req.body.role,
         password: req.body.password
         
     })

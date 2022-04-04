@@ -4,6 +4,7 @@ import mongoose from  "mongoose"
 import dotenv from "dotenv"
 import products from "./src/routes/productRoutes.js"
 import user from "./src/routes/userRoutes.js"
+import cart from "./src/routes/cartRoutes.js"
 
 dotenv.config("./.env")
 let app = express()
@@ -19,6 +20,7 @@ app.use(bodyParser.json())
 // })
 app.use('/products', products)
 app.use('/user', user)
+app.use('/cart',cart)
 let port = process.env.PORT
 
 app.listen(port,()=>{

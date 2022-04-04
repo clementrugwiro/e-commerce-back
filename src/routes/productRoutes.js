@@ -1,4 +1,5 @@
 import express from "express"
+import verifyToken from "../middleware/verifytoken.js"
 import cloudinary from "../utils/cloudinary.js"
 import upload from "../utils/multer.js"
 import Product from "../models/product.js"
@@ -30,7 +31,7 @@ let productroute = express()
 
 productroute.delete('/delete/:id', productcontroller.deleteproduct)
 
-productroute.get('/getall', productcontroller.getallproducts)
+productroute.get('/getall',verifyToken ,productcontroller.getallproducts)
 
 
 
