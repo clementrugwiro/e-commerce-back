@@ -5,6 +5,8 @@ import dotenv from "dotenv"
 import products from "./src/routes/productRoutes.js"
 import user from "./src/routes/userRoutes.js"
 import cart from "./src/routes/cartRoutes.js"
+import wish from "./src/routes/wishlistRoutes.js"
+import review from "./src/routes/reviewsRoutes.js"
 
 dotenv.config("./.env")
 let app = express()
@@ -21,6 +23,8 @@ app.use(bodyParser.json())
 app.use('/products', products)
 app.use('/user', user)
 app.use('/cart',cart)
+app.use('/review',review)
+app.use('/wish',wish)
 let port = process.env.PORT
 
 app.listen(port,()=>{
